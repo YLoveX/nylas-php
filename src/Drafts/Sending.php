@@ -50,9 +50,10 @@ class Sending
         $params      = Helper::arrayToMulti($params);
         $accessToken = $this->options->getAccessToken();
 
-        $rule = V::simpleArray(V::keySet(
+        $rule = V::each(V::keySet(
             V::key('version', V::intType()->min(0)),
-            V::key('draft_id', V::stringType()->notEmpty())
+            V::key('draft_id', V::stringType()->notEmpty()),
+            V::key('tracking', V::arrayType(), false)
         ));
 
         V::doValidate($rule, $params);
